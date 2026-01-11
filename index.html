@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>田字格生成器 - 拼音默写练习</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 输入区域 -->
+        <div class="input-section no-print">
+            <h1>田字格生成器</h1>
+            <p class="subtitle">输入中文内容，生成拼音田字格，用于默写练习</p>
+            
+            <div class="form-group">
+                <label for="chineseInput">输入中文内容：</label>
+                <textarea 
+                    id="chineseInput" 
+                    placeholder="请输入要练习的中文内容，例如：我爱学习中文"
+                    rows="5"
+                ></textarea>
+            </div>
+
+            <div class="button-group">
+                <button id="generateBtn" class="btn btn-primary">
+                    <span class="icon">📝</span>
+                    生成字帖
+                </button>
+                <button id="clearBtn" class="btn btn-secondary">
+                    <span class="icon">🗑️</span>
+                    清空
+                </button>
+            </div>
+
+            <div class="tips">
+                <h3>💡 使用说明：</h3>
+                <ul>
+                    <li>输入您想让学生练习的中文内容</li>
+                    <li>点击"生成字帖"按钮，系统会自动生成带拼音的空白田字格</li>
+                    <li>田字格中不显示汉字，只显示拼音，供学生根据拼音默写</li>
+                    <li>生成后会自动打开打印预览，可以直接打印使用</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 预览区域 -->
+        <div class="preview-section" id="previewSection" style="display: none;">
+            <div class="print-header">
+                <h2>拼音默写练习</h2>
+                <p class="date">日期：_______________  姓名：_______________</p>
+            </div>
+            <div id="tianzigeng" class="tianzigeng-container"></div>
+        </div>
+    </div>
+
+    <!-- 引入拼音库 -->
+    <script src="https://cdn.jsdelivr.net/npm/pinyin-pro@3.24.2/dist/index.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,303 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px 10px;
+}
+
+.container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 输入区域样式 */
+.input-section {
+    background: white;
+    border-radius: 15px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+    max-width: 794px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1em;
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1em;
+}
+
+textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    font-family: 'Microsoft YaHei', sans-serif;
+    resize: vertical;
+    transition: border-color 0.3s;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.btn {
+    padding: 15px 40px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.btn-secondary:hover {
+    background: #d0d0d0;
+    transform: translateY(-2px);
+}
+
+.icon {
+    font-size: 1.2em;
+}
+
+/* 使用说明 */
+.tips {
+    background: #f8f9ff;
+    border-left: 4px solid #667eea;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.tips h3 {
+    color: #667eea;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.tips ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.tips li {
+    padding: 8px 0;
+    color: #555;
+    line-height: 1.6;
+}
+
+.tips li:before {
+    content: "✓ ";
+    color: #667eea;
+    font-weight: bold;
+    margin-right: 8px;
+}
+
+/* 预览区域 - A4纸张尺寸 */
+.preview-section {
+    background: white;
+    width: 794px;
+    max-width: 100%;
+    min-height: 1123px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    position: relative;
+}
+
+.print-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #333;
+}
+
+.print-header h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.date {
+    color: #666;
+    font-size: 1.1em;
+}
+
+/* 田字格容器 */
+.tianzigeng-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 田字格行 */
+.tianzigeng-row {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+/* 单个田字格 */
+.tianzigeng-item {
+    width: 60px;
+    min-width: 60px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+/* 空格占位 */
+.tianzigeng-space {
+    width: 60px;
+    min-width: 60px;
+    height: 89px;
+    flex-shrink: 0;
+}
+
+.pinyin {
+    height: 26px;
+    line-height: 26px;
+    font-size: 17px;
+    color: #333;
+    font-weight: 500;
+    margin-bottom: 3px;
+}
+
+.grid {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #000;
+    position: relative;
+    background: white;
+    background-image: 
+        linear-gradient(to right, #888 0%, #888 50%, transparent 50%, transparent 100%),
+        linear-gradient(to bottom, #888 0%, #888 50%, transparent 50%, transparent 100%);
+    background-size: 6px 1px, 1px 6px;
+    background-position: center, center;
+    background-repeat: repeat-x, repeat-y;
+}
+
+/* 移除伪元素虚线，改用背景图案 */
+.grid:before,
+.grid:after {
+    display: none;
+}
+
+
+
+/* 打印样式 - A4纸张 */
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+
+    body {
+        background: white;
+        padding: 0;
+        margin: 0;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .preview-section {
+        width: 210mm;
+        min-height: 297mm;
+        max-width: 100%;
+        margin: 0;
+        padding: 15mm 10mm;
+        box-shadow: none;
+        border-radius: 0;
+        page-break-after: always;
+    }
+
+    .tianzigeng-container {
+        gap: 15px;
+        padding: 10px 0;
+    }
+
+    .tianzigeng-row {
+        gap: 5px;
+    }
+
+    /* 确保打印时每页都有良好的分页 */
+    .tianzigeng-item {
+        page-break-inside: avoid;
+    }
+    
+    .print-header {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+    
+    .print-header h2 {
+        font-size: 1.5em;
+    }
+}

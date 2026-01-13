@@ -250,6 +250,11 @@ textarea:focus {
     break-inside: avoid;
 }
 
+/* 拼音模式的行（四线格连成一行） */
+.row-pinyin {
+    gap: 0;
+}
+
 /* 每行之间添加分页后的顶部间距 */
 .tianzigeng-row:first-child {
     margin-top: 0;
@@ -280,6 +285,12 @@ textarea:focus {
     height: 99px; /* 36px四线格 + 3px间距 + 60px田字格 */
 }
 
+/* 拼音模式下空格占位不显示四线格，只保留高度占位 */
+.row-pinyin .space-pinyin {
+    position: relative;
+    /* 移除四线格样式，只保留空白占位 */
+}
+
 .pinyin {
     height: 26px;
     line-height: 26px;
@@ -294,32 +305,55 @@ textarea:focus {
     height: 36px;
     border: none;
     border-radius: 0;
-    background: white;
+    border-top: 2px solid #000;    /* 顶线 - 黑色实线 2px */
+    border-bottom: 2px solid #000; /* 底线 - 黑色实线 2px */
+    background: 
+        linear-gradient(to bottom, 
+            transparent 0, transparent 33.33%,
+            #ccc 33.33%, #ccc calc(33.33% + 1px),  /* 第二线 - 灰色 */
+            transparent calc(33.33% + 1px), transparent 66.67%,
+            #ccc 66.67%, #ccc calc(66.67% + 1px),  /* 第三线 - 灰色 */
+            transparent calc(66.67% + 1px), transparent 100%
+        );
+    background-size: 100% 100%;
+    background-position: 0 0;
+    /* 添加虚线效果到中间两条线 */
+    background-image:
+        repeating-linear-gradient(to right,
+            #ccc 0, #ccc 6px,
+            transparent 6px, transparent 10px
+        ),
+        repeating-linear-gradient(to right,
+            #ccc 0, #ccc 6px,
+            transparent 6px, transparent 10px
+        );
+    background-size: 100% 1px, 100% 1px;
+    background-position: 0 33.33%, 0 66.67%;
+    background-repeat: repeat-x, repeat-x;
     position: relative;
     margin-bottom: 3px;
-    border-top: 2px solid #000;
-    border-bottom: 2px solid #000;
+    border-left: 1px dashed #ccc; /* 每个四线格都有左边框 - 灰色虚线 */
+    border-right: 1px dashed #ccc; /* 右边框作为竖线分隔 - 灰色虚线 */
 }
 
-/* 四线格的中间两条实线（第二线和第三线） */
-.pinyin-blank:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 33.33%;
-    height: 1px;
-    background: #000;
+/* 第一个四线格的左边框改为黑色实线 */
+.row-pinyin .tianzigeng-item:first-child .pinyin-blank {
+    border-left: 2px solid #000;
 }
 
-.pinyin-blank:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 66.67%;
-    height: 1px;
-    background: #000;
+/* 最后一个四线格的右边框改为黑色实线 */
+.row-pinyin .tianzigeng-item:last-child .pinyin-blank {
+    border-right: 2px solid #000;
+}
+
+/* 空格前的四线格右边框改为黑色实线（空格导致的间隔） */
+.row-pinyin .tianzigeng-item:has(+ .space-pinyin) .pinyin-blank {
+    border-right: 2px solid #000;
+}
+
+/* 空格后的四线格左边框改为黑色实线（空格导致的间隔） */
+.row-pinyin .space-pinyin + .tianzigeng-item .pinyin-blank {
+    border-left: 2px solid #000;
 }
 
 .grid {
@@ -404,6 +438,11 @@ textarea:focus {
         page-break-inside: avoid;
         break-inside: avoid;
         margin-bottom: 15px;
+    }
+    
+    /* 打印时拼音模式的行间距为0 */
+    .row-pinyin {
+        gap: 0;
     }
 
     /* 确保打印时每页都有良好的分页 */

@@ -99,7 +99,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // 如果需要新起一行
             if (currentRowCount === 0) {
                 currentRow = document.createElement('div');
-                currentRow.className = 'tianzigeng-row';
+                // 根据模式添加不同的类名
+                currentRow.className = worksheetType === 'pinyin' ? 'tianzigeng-row row-pinyin' : 'tianzigeng-row';
                 tianzigengContainer.appendChild(currentRow);
             }
             

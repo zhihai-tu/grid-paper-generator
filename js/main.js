@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const clearBtn = document.getElementById('clearBtn');
     const previewSection = document.getElementById('previewSection');
     const tianzigengContainer = document.getElementById('tianzigeng');
+    const worksheetTitle = document.getElementById('worksheetTitle');
 
     // 生成字帖按钮点击事件
     generateBtn.addEventListener('click', function() {
@@ -15,8 +16,18 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
+        // 获取选中的字帖类型
+        const worksheetType = document.querySelector('input[name="worksheetType"]:checked').value;
+        
+        // 更新标题
+        if (worksheetType === 'hanzi') {
+            worksheetTitle.textContent = '拼音默写汉字练习';
+        } else {
+            worksheetTitle.textContent = '汉字默写拼音练习';
+        }
+
         // 生成田字格
-        generateTianzigeng(text);
+        generateTianzigeng(text, worksheetType);
         
         // 显示预览区域
         previewSection.style.display = 'block';
@@ -40,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // 生成田字格函数
-    function generateTianzigeng(text) {
+    function generateTianzigeng(text, worksheetType) {
         // 清空之前的内容
         tianzigengContainer.innerHTML = '';
         
@@ -74,31 +85,38 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // 为每个字符生成田字格
         chars.forEach((char, index) => {
+            // 如果是换行符，重置行计数，准备开始新行
+            if (char === '\n') {
+                currentRowCount = 0; // 重置为0，下一个字符将开始新行
+                return;
+            }
+            
+            // 如果当前行已满11个字，忽略后续字符直到遇到换行符
+            if (currentRowCount >= charsPerRow) {
+                return;
+            }
+            
             // 如果需要新起一行
-            if (currentRowCount === 0 || currentRowCount >= charsPerRow) {
+            if (currentRowCount === 0) {
                 currentRow = document.createElement('div');
                 currentRow.className = 'tianzigeng-row';
                 tianzigengContainer.appendChild(currentRow);
-                currentRowCount = 0;
             }
             
             // 如果是空格，创建空白占位
             if (char === ' ') {
                 const space = document.createElement('div');
-                space.className = 'tianzigeng-space';
+                // 根据模式设置不同的高度
+                space.className = worksheetType === 'pinyin' ? 'tianzigeng-space space-pinyin' : 'tianzigeng-space';
                 currentRow.appendChild(space);
                 currentRowCount++;
                 return;
             }
             
-            // 如果是换行符，强制换行
-            if (char === '\n') {
-                currentRowCount = charsPerRow; // 强制下一个字符新起一行
-                return;
-            }
-            
-            // 获取对应的拼音
+            // 获取对应的拼音和汉字
             let pinyinText = '';
+            let hanziText = char;
+            
             if (/[\u4e00-\u9fa5]/.test(char)) {
                 // 使用整句转换得到的拼音数组
                 pinyinText = pinyinArray[index] || char;
@@ -111,24 +129,42 @@ document.addEventListener('DOMContentLoaded', function() {
             const item = document.createElement('div');
             item.className = 'tianzigeng-item';
             
-            // 拼音
-            const pinyin = document.createElement('div');
-            pinyin.className = 'pinyin';
-            pinyin.textContent = pinyinText;
+            // 根据字帖类型决定显示内容
+            if (worksheetType === 'hanzi') {
+                // 显示拼音，学生默写汉字
+                const pinyin = document.createElement('div');
+                pinyin.className = 'pinyin';
+                pinyin.textContent = pinyinText;
+                item.appendChild(pinyin);
+                
+                // 田字格（空白）
+                const grid = document.createElement('div');
+                grid.className = 'grid';
+                item.appendChild(grid);
+            } else {
+                // 显示汉字，学生默写拼音
+                const pinyin = document.createElement('div');
+                pinyin.className = 'pinyin pinyin-blank';
+                pinyin.textContent = ''; // 拼音区域留空
+                item.appendChild(pinyin);
+                
+                // 田字格（显示汉字）
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-with-char';
+                
+                const charSpan = document.createElement('span');
+                charSpan.className = 'character';
+                charSpan.textContent = hanziText;
+                grid.appendChild(charSpan);
+                
+                item.appendChild(grid);
+            }
             
-            // 田字格（不需要添加斜线，CSS中用伪元素实现十字虚线）
-            const grid = document.createElement('div');
-            grid.className = 'grid';
-            
-            // 组装
-            item.appendChild(pinyin);
-            item.appendChild(grid);
             currentRow.appendChild(item);
-            
             currentRowCount++;
         });
     }
 
-    // 设置默认示例文本（可选）
-    chineseInput.value = '我爱学习中文';
+    // 设置默认示例文本
+    chineseInput.value = '我爱 学习 中文 英文\n火了 大了 儿子 个子\n人口 大人 大山 可是';
 });

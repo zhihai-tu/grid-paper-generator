@@ -14,6 +14,22 @@
             <p class="subtitle">输入中文内容，生成拼音田字格，用于默写练习</p>
             
             <div class="form-group">
+                <label>选择字帖类型：</label>
+                <div class="radio-group">
+                    <label class="radio-label">
+                        <input type="radio" name="worksheetType" value="hanzi" checked>
+                        <span>根据拼音默写汉字</span>
+                        <small>（显示拼音，学生填写汉字）</small>
+                    </label>
+                    <label class="radio-label">
+                        <input type="radio" name="worksheetType" value="pinyin">
+                        <span>根据汉字默写拼音</span>
+                        <small>（显示汉字，学生填写拼音）</small>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
                 <label for="chineseInput">输入中文内容：</label>
                 <textarea 
                     id="chineseInput" 
@@ -37,8 +53,18 @@
                 <h3>💡 使用说明：</h3>
                 <ul>
                     <li>输入您想让学生练习的中文内容</li>
-                    <li>点击"生成字帖"按钮，系统会自动生成带拼音的空白田字格</li>
-                    <li>田字格中不显示汉字，只显示拼音，供学生根据拼音默写</li>
+                    <li>选择字帖类型：<br>
+                        <strong>根据拼音默写汉字</strong> - 显示拼音，田字格空白，让学生写汉字<br>
+                        <strong>根据汉字默写拼音</strong> - 显示汉字，四线格空白，让学生写拼音
+                    </li>
+                    <li><strong>排版规则：</strong><br>
+                        • 每行最多显示 <strong>11 个字</strong>（或位置）<br>
+                        • 超过 11 个字的内容会被自动忽略<br>
+                        • 使用<strong>空格</strong>可以在相应位置留空<br>
+                        • 使用<strong>换行符</strong>（回车键）可以开始新的一行<br>
+                        • 所有行<strong>居左对齐</strong>
+                    </li>
+                    <li>点击"生成字帖"按钮，系统会自动生成相应类型的字帖</li>
                     <li>生成后会自动打开打印预览，可以直接打印使用</li>
                 </ul>
             </div>
@@ -47,7 +73,7 @@
         <!-- 预览区域 -->
         <div class="preview-section" id="previewSection" style="display: none;">
             <div class="print-header">
-                <h2>拼音默写练习</h2>
+                <h2 id="worksheetTitle">拼音默写练习</h2>
                 <p class="date">日期：_______________  姓名：_______________</p>
             </div>
             <div id="tianzigeng" class="tianzigeng-container"></div>

@@ -16,7 +16,7 @@
 1. **创建 GitHub 仓库**
    - 访问 https://github.com/new
    - 填写仓库名称：`tianzige-generator`（或你喜欢的名称）
-   - 描述：`中文田字格字帖生成器 - 智能拼音识别，A4纸张打印`
+   - 描述：`中文田字格字帖生成器 - 支持拼音默写汉字和汉字默写拼音两种模式，智能拼音识别，标准四线格，A4纸张打印`
    - 选择 Public（公开）或 Private（私有）
    - 不要勾选"Initialize this repository with a README"
    - 点击"Create repository"

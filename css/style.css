@@ -55,6 +55,56 @@ label {
     font-size: 1.1em;
 }
 
+/* 单选按钮组样式 */
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.radio-label {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: normal;
+}
+
+.radio-label:hover {
+    border-color: #667eea;
+    background: #f8f9ff;
+}
+
+.radio-label input[type="radio"] {
+    margin-right: 12px;
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"]:checked + span {
+    color: #667eea;
+    font-weight: bold;
+}
+
+.radio-label span {
+    display: block;
+    font-size: 1em;
+    color: #333;
+}
+
+.radio-label small {
+    display: block;
+    color: #999;
+    font-size: 0.85em;
+    margin-top: 5px;
+}
+
 textarea {
     width: 100%;
     padding: 15px;
@@ -185,7 +235,7 @@ textarea:focus {
     flex-direction: column;
     gap: 20px;
     padding: 20px 0;
-    align-items: center;
+    align-items: flex-start;
     width: 100%;
     box-sizing: border-box;
 }
@@ -194,8 +244,19 @@ textarea:focus {
 .tianzigeng-row {
     display: flex;
     gap: 6px;
-    justify-content: center;
+    justify-content: flex-start;
     flex-wrap: nowrap;
+    page-break-inside: avoid;
+    break-inside: avoid;
+}
+
+/* 每行之间添加分页后的顶部间距 */
+.tianzigeng-row:first-child {
+    margin-top: 0;
+}
+
+.tianzigeng-row {
+    page-break-after: auto;
 }
 
 /* 单个田字格 */
@@ -214,6 +275,11 @@ textarea:focus {
     flex-shrink: 0;
 }
 
+/* 拼音模式下的空格占位 */
+.space-pinyin {
+    height: 99px; /* 36px四线格 + 3px间距 + 60px田字格 */
+}
+
 .pinyin {
     height: 26px;
     line-height: 26px;
@@ -221,6 +287,39 @@ textarea:focus {
     color: #333;
     font-weight: 500;
     margin-bottom: 3px;
+}
+
+/* 拼音四线格（用于默写拼音模式） */
+.pinyin-blank {
+    height: 36px;
+    border: none;
+    border-radius: 0;
+    background: white;
+    position: relative;
+    margin-bottom: 3px;
+    border-top: 2px solid #000;
+    border-bottom: 2px solid #000;
+}
+
+/* 四线格的中间两条实线（第二线和第三线） */
+.pinyin-blank:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 33.33%;
+    height: 1px;
+    background: #000;
+}
+
+.pinyin-blank:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 66.67%;
+    height: 1px;
+    background: #000;
 }
 
 .grid {
@@ -235,6 +334,22 @@ textarea:focus {
     background-size: 6px 1px, 1px 6px;
     background-position: center, center;
     background-repeat: repeat-x, repeat-y;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 田字格中的汉字（用于默写拼音模式） */
+.grid-with-char {
+    background-image: none;
+}
+
+.character {
+    font-size: 36px;
+    color: #333;
+    font-weight: 500;
+    font-family: 'KaiTi', 'STKaiti', '楷体', serif;
+    z-index: 1;
 }
 
 /* 移除伪元素虚线，改用背景图案 */
@@ -249,7 +364,7 @@ textarea:focus {
 @media print {
     @page {
         size: A4;
-        margin: 0;
+        margin: 20mm 10mm 15mm 10mm;
     }
 
     body {
@@ -268,23 +383,27 @@ textarea:focus {
     }
 
     .preview-section {
-        width: 210mm;
-        min-height: 297mm;
+        width: 100%;
+        min-height: auto;
         max-width: 100%;
         margin: 0;
-        padding: 15mm 10mm;
+        padding: 0;
         box-shadow: none;
         border-radius: 0;
-        page-break-after: always;
+        page-break-after: avoid;
     }
 
     .tianzigeng-container {
         gap: 15px;
-        padding: 10px 0;
+        padding: 0;
     }
 
     .tianzigeng-row {
         gap: 5px;
+        justify-content: flex-start;
+        page-break-inside: avoid;
+        break-inside: avoid;
+        margin-bottom: 15px;
     }
 
     /* 确保打印时每页都有良好的分页 */
@@ -293,11 +412,13 @@ textarea:focus {
     }
     
     .print-header {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         padding-bottom: 10px;
+        page-break-after: avoid;
     }
     
     .print-header h2 {
         font-size: 1.5em;
+        margin-bottom: 10px;
     }
 }

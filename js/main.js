@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const previewSection = document.getElementById('previewSection');
     const tianzigengContainer = document.getElementById('tianzigeng');
     const worksheetTitle = document.getElementById('worksheetTitle');
+    const worksheetType = document.getElementById('worksheetType');
 
     // 生成字帖按钮点击事件
     generateBtn.addEventListener('click', function() {
@@ -17,17 +18,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         // 获取选中的字帖类型
-        const worksheetType = document.querySelector('input[name="worksheetType"]:checked').value;
+        const selectedType = document.querySelector('input[name="worksheetType"]:checked').value;
         
-        // 更新标题
-        if (worksheetType === 'hanzi') {
+        // 更新标题和说明
+        if (selectedType === 'hanzi') {
             worksheetTitle.textContent = '拼音默写汉字练习';
+            worksheetType.textContent = '📝 练习说明：根据上方拼音，在田字格中默写对应的汉字';
         } else {
             worksheetTitle.textContent = '汉字默写拼音练习';
+            worksheetType.textContent = '📝 练习说明：根据田字格中的汉字，在上方四线格中默写对应的拼音';
         }
 
         // 生成田字格
-        generateTianzigeng(text, worksheetType);
+        generateTianzigeng(text, selectedType);
         
         // 显示预览区域
         previewSection.style.display = 'block';

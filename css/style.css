@@ -197,6 +197,36 @@ textarea:focus {
     margin-right: 8px;
 }
 
+/* 打印警告样式 */
+.print-warning {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 8px;
+    padding: 15px !important;
+    margin-top: 15px !important;
+}
+
+.print-warning:before {
+    content: "" !important;
+    margin-right: 0 !important;
+}
+
+.print-warning strong {
+    color: #856404;
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.05em;
+}
+
+.print-guide-img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1px solid #ddd;
+}
+
 /* 预览区域 - A4纸张尺寸 */
 .preview-section {
     background: white;
@@ -222,6 +252,17 @@ textarea:focus {
     font-size: 2em;
     margin-bottom: 15px;
     color: #333;
+}
+
+.worksheet-type {
+    color: #667eea;
+    font-size: 1em;
+    margin: 10px 0 15px 0;
+    padding: 10px 20px;
+    background: #f8f9ff;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    font-weight: 500;
 }
 
 .date {
@@ -459,5 +500,11 @@ textarea:focus {
     .print-header h2 {
         font-size: 1.5em;
         margin-bottom: 10px;
+    }
+    
+    .worksheet-type {
+        font-size: 0.9em;
+        margin: 8px 0 12px 0;
+        padding: 8px 15px;
     }
 }

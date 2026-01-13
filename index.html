@@ -66,6 +66,11 @@
                     </li>
                     <li>点击"生成字帖"按钮，系统会自动生成相应类型的字帖</li>
                     <li>生成后会自动打开打印预览，可以直接打印使用</li>
+                    <li class="print-warning">
+                        <strong>⚠️ 重要提示：打印时请务必勾选"背景图形"选项</strong><br>
+                        否则四线格的辅助线可能无法正常显示。参考下图：<br>
+                        <img src="images/print-guide.png" alt="打印设置示例" class="print-guide-img">
+                    </li>
                 </ul>
             </div>
         </div>
@@ -74,6 +79,7 @@
         <div class="preview-section" id="previewSection" style="display: none;">
             <div class="print-header">
                 <h2 id="worksheetTitle">拼音默写练习</h2>
+                <p class="worksheet-type" id="worksheetType"></p>
                 <p class="date">日期：_______________  姓名：_______________</p>
             </div>
             <div id="tianzigeng" class="tianzigeng-container"></div>
